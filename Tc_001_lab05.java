@@ -86,7 +86,7 @@ public class Tc_001_lab05 {
 
         // 3. Email → unique email each run
         WebElement email = driver.findElement(By.id("input-email"));
-        String uniqueEmail = "akash" + System.currentTimeMillis() + "@gmail.com";
+        String uniqueEmail = "akash6656" + "@gmail.com";
         email.sendKeys(uniqueEmail);
 
         // 4. Telephone
@@ -128,6 +128,7 @@ public class Tc_001_lab05 {
         if (orderHistoryHeading.isDisplayed()) {
             System.out.println("Navigated to Order History page.");
         }
+        
 
         driver.quit();
     }

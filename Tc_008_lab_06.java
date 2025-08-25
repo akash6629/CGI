@@ -1,141 +1,88 @@
 package testscripts;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import io.github.bonigarcia.wdm.WebDriverManager;
 
-import java.time.Duration;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Tc_008_lab_06 {
 
-    public static void main(String[] args) throws InterruptedException {
-
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-
-        // Create WebDriverWait object
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        // 1. Launch the URL
-        driver.get("https://tutorialsninja.com/demo/");
-
-        // 2. Verify 'Title' of the page
-        String title = driver.getTitle();
-        System.out.println("Page Title: " + title);
-
-        if (title.contains("Your Store")) {
-            System.out.println("Title verified");
-        } else {
-            System.out.println("Title mismatch");
-        }
-
-        // 3. Click on 'My Account' dropdown
-        driver.findElement(By.linkText("My Account")).click();
-
-        // 4. Select 'Register' from dropdown
-        driver.findElement(By.linkText("Register")).click();
-
-        // 5. Verify heading 'Register Account'
-        WebElement heading = driver.findElement(By.xpath("//*[@id=\"content\"]/h1"));
-        if (heading.isDisplayed()) {
-            System.out.println("Heading 'Register Account' is verified");
-        }
-
-        // 6. Click on 'Continue' without filling anything
-        driver.findElement(By.xpath("//input[@value='Continue']")).click();
-
-        // 7. Verify warning message
-        WebElement warn = driver.findElement(By.xpath("//*[@id=\"account-register\"]/div[1]"));
-        String warning = warn.getText();
-        if (warning.contains("Warning: You must agree to the Privacy Policy!")) {
-            System.out.println("Warning Appeared: " + warning);
-        } else {
-            System.out.println("Warning not Appeared: " + warning);
-        }
-
-        // Part 2: Personal Details
-        // 1. First Name
-        WebElement firstName = driver.findElement(By.id("input-firstname"));
-        String longFirstName = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFG"; // 33 chars
-        firstName.sendKeys(longFirstName);
-
-        driver.findElement(By.xpath("//input[@value='Continue']")).click();
-
-        WebElement firstNameError = driver.findElement(
-            By.xpath("//div[contains(text(),'First Name must be between 1 and 32 characters!')]"));
-        if (firstNameError.isDisplayed()) {
-            System.out.println("First Name validation error displayed: " + firstNameError.getText());
-        }
-
-        driver.findElement(By.id("input-firstname")).clear();
-        driver.findElement(By.id("input-firstname")).sendKeys("Akash");
-
-        // 2. Last Name
-        WebElement lastName = driver.findElement(By.id("input-lastname"));
-        String longLastName = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFG"; // 33 chars
-        lastName.sendKeys(longLastName);
-
-        driver.findElement(By.xpath("//input[@value='Continue']")).click();
-
-        WebElement lastNameError = driver.findElement(
-            By.xpath("//div[contains(text(),'Last Name must be between 1 and 32 characters!')]"));
-        if (lastNameError.isDisplayed()) {
-            System.out.println("Last Name validation error displayed: " + lastNameError.getText());
-        }
-
-        driver.findElement(By.id("input-lastname")).clear();
-        driver.findElement(By.id("input-lastname")).sendKeys("Mangond");
-
-        // 3. Email → to avoid "already registered" error, make unique email each run
-        WebElement email = driver.findElement(By.id("input-email"));
-        String uniqueEmail = "akash" + System.currentTimeMillis() + "@gmail.com";
-        email.sendKeys(uniqueEmail);
-
-        // 4. Telephone
-        WebElement telephone = driver.findElement(By.id("input-telephone"));
-        telephone.sendKeys("9876543210");
-
-        System.out.println("Personal details entered successfully");
-
-        // Password + Confirm
-        driver.findElement(By.id("input-password")).sendKeys("Test1234");
-        driver.findElement(By.id("input-confirm")).sendKeys("Test1234");
-
-        // Newsletter & Agree Policy
-        driver.findElement(By.xpath("//input[@name='newsletter' and @value='1']")).click();
-        driver.findElement(By.name("agree")).click();
-        driver.findElement(By.xpath("//input[@value='Continue']")).click();
-
-        // Success message
-        WebElement successMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//h1[contains(text(),'Your Account Has Been Created!')]")));
-
-        if (successMsg.isDisplayed()) {
-            System.out.println("Registration successful: " + successMsg.getText());
-        } else {
-            System.out.println(" Registration failed!");
-        }
-
-        // Click Continue button on success page
-        driver.findElement(By.xpath("//a[contains(text(),'Continue')]")).click();
+	public static void main(String[] args) throws InterruptedException {
+		WebDriverManager.chromedriver().setup();
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://tutorialsninja.com/demo");
+		driver.manage().window().maximize();
+		
+		driver.findElement(By.linkText("My Account")).click();
+        driver.findElement(By.linkText("Login")).click();    
+        driver.findElement(By.xpath("//*[@id=\"input-email\"]")).sendKeys("akash6656@gmail.com");
+        driver.findElement(By.xpath("//*[@id=\"input-password\"]")).sendKeys("Test1234");       
+        driver.findElement(By.xpath("//*[@id=\"content\"]/div/div[2]/div/form/input")).click();
         
-        driver.findElement(By.xpath("//*[@id=\"menu\"]/div[2]/ul/li[3]/a")).click();
-     driver.findElement(By.xpath("//*[@id=\"menu\"]/div[2]/ul/li[3]/div/div/ul/li[2]/a")).click();
-     // Locate the dropdown element
-       
 
-       
+		
+		driver.findElement(By.xpath("//*[@id=\"menu\"]/div[2]/ul/li[3]/a")).click();
+		
+		driver.findElement(By.linkText("Monitors (2)")).click();
+		
+		WebElement sort = driver.findElement(By.id("input-limit"));
+		sort.click();
+		Select sort1 = new Select(sort);
+		sort1.selectByContainsVisibleText("25");
+		
+		driver.findElement(By.xpath("//*[@id=\"content\"]/div[3]/div[1]/div/div[2]/div[2]/button[1]")).click();
+		Thread.sleep(3000);
+		WebElement input = driver.findElement(By.xpath("//*[@id=\"search\"]/input"));
+		input.sendKeys("Mobile");
+		WebElement enter = driver.findElement(By.xpath("//*[@id=\"search\"]/span/button"));
+		enter.click();
+		
+		WebElement select = driver.findElement(By.xpath("//*[@id=\"description\"]"));
+		select.click();
+		
+		driver.findElement(By.xpath("//*[@id=\"button-search\"]")).click();
+		
+		driver.findElement(By.linkText("HTC Touch HD")).click();
+		
+		WebElement input2 = driver.findElement(By.xpath("//*[@id=\"input-quantity\"]"));
+		input2.clear();
+		input2.sendKeys("3");
+		Thread.sleep(2000);
+		
+		WebElement enter2 = driver.findElement(By.xpath("//*[@id=\"button-cart\"]"));
+		enter2.click();
+		Thread.sleep(3000);
+		
+		WebElement message = driver.findElement(By.xpath("//*[@id=\"product-product\"]/div[1]"));
+		String expectedMsg = "Success: You have added HTC Touch HD to your shopping cart!";
+		if(message.getText().contains(expectedMsg)) {
+			System.out.println("Message is appearing");
+		}
+		else {
+			System.out.println("Message is not appearing");
+		}
+		
+		driver.findElement(By.id("cart-total")).click();
+		
+		WebElement title = driver.findElement(By.xpath("//*[@id=\"cart\"]/ul/li[1]/table/tbody/tr/td[2]/a"));
+		String expectedTitle = "HTC Touch HD";
+		if(title.getText().contains(expectedTitle)) {
+			System.out.println("Mobile name is appearing");
+		}
+		else {
+			System.out.println("Mobile name is not appearing");
+		}
+		
+		driver.findElement(By.xpath("//*[@id=\"cart\"]/ul/li[2]/div/p/a[2]/strong")).click();
+		
+		driver.findElement(By.linkText("My Account")).click();
+		driver.findElement(By.linkText("Logout")).click();
+		driver.findElement(By.linkText("Continue")).click();
+		
+		driver.quit();
 
-       
-
-     
-        
-    }
+	}
 }
