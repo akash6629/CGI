@@ -40,7 +40,7 @@ public class Tc_009_sync {
 		
 		JavascriptExecutor js=(JavascriptExecutor)driver;
 
-     js.executeScript("alert('Hello')");
+   //  js.executeScript("alert('Hello')");
 
 	js.executeScript("window.scrollBy(0, document.body.scrollHeight)");		
  
