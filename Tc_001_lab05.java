@@ -4,11 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import io.github.bonigarcia.wdm.WebDriverManager;
-
-import java.time.Duration;
 
 public class Tc_001_lab05 {
 
@@ -17,9 +13,6 @@ public class Tc_001_lab05 {
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
-
-        // Create WebDriverWait object
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         // 1. Launch the URL
         driver.get("https://tutorialsninja.com/demo/");
@@ -91,7 +84,7 @@ public class Tc_001_lab05 {
         driver.findElement(By.id("input-lastname")).clear();
         driver.findElement(By.id("input-lastname")).sendKeys("Mangond");
 
-        // 3. Email → to avoid "already registered" error, make unique email each run
+        // 3. Email → unique email each run
         WebElement email = driver.findElement(By.id("input-email"));
         String uniqueEmail = "akash" + System.currentTimeMillis() + "@gmail.com";
         email.sendKeys(uniqueEmail);
@@ -112,8 +105,8 @@ public class Tc_001_lab05 {
         driver.findElement(By.xpath("//input[@value='Continue']")).click();
 
         // Success message
-        WebElement successMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//h1[contains(text(),'Your Account Has Been Created!')]")));
+        WebElement successMsg = driver.findElement(
+                By.xpath("//h1[contains(text(),'Your Account Has Been Created!')]"));
 
         if (successMsg.isDisplayed()) {
             System.out.println("Registration successful: " + successMsg.getText());
@@ -125,19 +118,17 @@ public class Tc_001_lab05 {
         driver.findElement(By.xpath("//a[contains(text(),'Continue')]")).click();
 
         // Navigate to 'View your order history'
-        WebElement orderHistoryLink = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.linkText("View your order history")));
+        WebElement orderHistoryLink = driver.findElement(By.linkText("View your order history"));
         orderHistoryLink.click();
 
         // Verify Order History page
-        WebElement orderHistoryHeading = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//h1[contains(text(),'Order History')]")));
+        WebElement orderHistoryHeading = driver.findElement(
+                By.xpath("//h1[contains(text(),'Order History')]"));
 
         if (orderHistoryHeading.isDisplayed()) {
             System.out.println("Navigated to Order History page.");
         }
 
-     
-        
+        driver.quit();
     }
 }

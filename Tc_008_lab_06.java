@@ -1,131 +1,141 @@
 package testscripts;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-
+import org.openqa.selenium.support.ui.WebDriverWait;
 import io.github.bonigarcia.wdm.WebDriverManager;
+
+import java.time.Duration;
 
 public class Tc_008_lab_06 {
 
     public static void main(String[] args) throws InterruptedException {
 
-        // Setup ChromeDriver
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
 
-        // Open application
+        // Create WebDriverWait object
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // 1. Launch the URL
         driver.get("https://tutorialsninja.com/demo/");
 
-        // -------- STEP 1: Login --------
-        driver.findElement(By.xpath("//span[text()='My Account']")).click();
-        driver.findElement(By.linkText("Login")).click();
-        driver.findElement(By.id("input-email")).sendKeys("testuser123@gmail.com"); // replace with your Lab 1 email
-        driver.findElement(By.id("input-password")).sendKeys("Test@123");           // replace with your Lab 1 password
-        driver.findElement(By.cssSelector("input.btn.btn-primary")).click();
+        // 2. Verify 'Title' of the page
+        String title = driver.getTitle();
+        System.out.println("Page Title: " + title);
 
-        if (driver.getTitle().contains("My Account")) {
-            System.out.println("✅ Login Successful");
+        if (title.contains("Your Store")) {
+            System.out.println("Title verified");
         } else {
-            System.out.println("❌ Login Failed");
+            System.out.println("Title mismatch");
         }
 
-        // -------- STEP 2: Components → Monitors --------
-        driver.findElement(By.linkText("Components")).click();
-        driver.findElement(By.linkText("Monitors (2)")).click();
+        // 3. Click on 'My Account' dropdown
+        driver.findElement(By.linkText("My Account")).click();
 
-        // -------- STEP 3: Select 25 from 'Show' dropdown --------
-        WebElement showDropDown = driver.findElement(By.id("input-limit"));
-        Select select = new Select(showDropDown);
-        select.selectByVisibleText("25");
-        System.out.println("✅ Selected 25 items per page");
+        // 4. Select 'Register' from dropdown
+        driver.findElement(By.linkText("Register")).click();
 
-        // -------- STEP 4: Add first item to cart --------
-        driver.findElement(By.xpath("(//button[@data-original-title='Add to Cart'])[1]")).click();
-        Thread.sleep(2000);
-
-        // -------- STEP 5: Click Specification tab --------
-        driver.findElement(By.linkText("Apple Cinema 30\"")).click();
-        driver.findElement(By.xpath("//a[text()='Specification']")).click();
-
-        WebElement specTable = driver.findElement(By.id("tab-specification"));
-        if (specTable.isDisplayed()) {
-            System.out.println("✅ Specification details verified");
-        } else {
-            System.out.println("❌ Specification details NOT found");
+        // 5. Verify heading 'Register Account'
+        WebElement heading = driver.findElement(By.xpath("//*[@id=\"content\"]/h1"));
+        if (heading.isDisplayed()) {
+            System.out.println("Heading 'Register Account' is verified");
         }
 
-        // -------- STEP 6: Add to wishlist --------
-        driver.findElement(By.xpath("//button[@data-original-title='Add to Wish List']")).click();
-        WebElement wishMsg = driver.findElement(By.cssSelector(".alert-success"));
-        if (wishMsg.getText().contains("Success: You have added Apple Cinema 30")) {
-            System.out.println("✅ Wishlist success message verified");
+        // 6. Click on 'Continue' without filling anything
+        driver.findElement(By.xpath("//input[@value='Continue']")).click();
+
+        // 7. Verify warning message
+        WebElement warn = driver.findElement(By.xpath("//*[@id=\"account-register\"]/div[1]"));
+        String warning = warn.getText();
+        if (warning.contains("Warning: You must agree to the Privacy Policy!")) {
+            System.out.println("Warning Appeared: " + warning);
         } else {
-            System.out.println("❌ Wishlist message not correct");
+            System.out.println("Warning not Appeared: " + warning);
         }
 
-        // -------- STEP 7: Search Mobile --------
-        driver.findElement(By.name("search")).sendKeys("Mobile");
-        driver.findElement(By.cssSelector("button.btn.btn-default.btn-lg")).click();
+        // Part 2: Personal Details
+        // 1. First Name
+        WebElement firstName = driver.findElement(By.id("input-firstname"));
+        String longFirstName = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFG"; // 33 chars
+        firstName.sendKeys(longFirstName);
 
-        // Click "Search in product descriptions"
-        WebElement descChk = driver.findElement(By.id("description"));
-        descChk.click();
-        if (descChk.isSelected()) {
-            System.out.println("✅ Search in description checkbox selected");
-        } else {
-            System.out.println("❌ Checkbox not selected");
+        driver.findElement(By.xpath("//input[@value='Continue']")).click();
+
+        WebElement firstNameError = driver.findElement(
+            By.xpath("//div[contains(text(),'First Name must be between 1 and 32 characters!')]"));
+        if (firstNameError.isDisplayed()) {
+            System.out.println("First Name validation error displayed: " + firstNameError.getText());
         }
 
-        // -------- STEP 8: Select HTC Touch HD --------
-        driver.findElement(By.linkText("HTC Touch HD")).click();
+        driver.findElement(By.id("input-firstname")).clear();
+        driver.findElement(By.id("input-firstname")).sendKeys("Akash");
 
-        WebElement qty = driver.findElement(By.id("input-quantity"));
-        qty.clear();
-        qty.sendKeys("3");
-        driver.findElement(By.id("button-cart")).click();
+        // 2. Last Name
+        WebElement lastName = driver.findElement(By.id("input-lastname"));
+        String longLastName = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFG"; // 33 chars
+        lastName.sendKeys(longLastName);
 
-        WebElement successMsg = driver.findElement(By.cssSelector(".alert-success"));
-        if (successMsg.getText().contains("Success: You have added HTC Touch HD")) {
-            System.out.println("✅ HTC Touch HD added to cart");
-        } else {
-            System.out.println("❌ HTC Touch HD not added to cart");
+        driver.findElement(By.xpath("//input[@value='Continue']")).click();
+
+        WebElement lastNameError = driver.findElement(
+            By.xpath("//div[contains(text(),'Last Name must be between 1 and 32 characters!')]"));
+        if (lastNameError.isDisplayed()) {
+            System.out.println("Last Name validation error displayed: " + lastNameError.getText());
         }
 
-        // -------- STEP 9: View cart --------
-        driver.findElement(By.xpath("//a[@title='Shopping Cart']")).click();
+        driver.findElement(By.id("input-lastname")).clear();
+        driver.findElement(By.id("input-lastname")).sendKeys("Mangond");
 
-        WebElement productName = driver.findElement(By.linkText("HTC Touch HD"));
-        if (productName.isDisplayed()) {
-            System.out.println("✅ Cart has HTC Touch HD");
+        // 3. Email → to avoid "already registered" error, make unique email each run
+        WebElement email = driver.findElement(By.id("input-email"));
+        String uniqueEmail = "akash" + System.currentTimeMillis() + "@gmail.com";
+        email.sendKeys(uniqueEmail);
+
+        // 4. Telephone
+        WebElement telephone = driver.findElement(By.id("input-telephone"));
+        telephone.sendKeys("9876543210");
+
+        System.out.println("Personal details entered successfully");
+
+        // Password + Confirm
+        driver.findElement(By.id("input-password")).sendKeys("Test1234");
+        driver.findElement(By.id("input-confirm")).sendKeys("Test1234");
+
+        // Newsletter & Agree Policy
+        driver.findElement(By.xpath("//input[@name='newsletter' and @value='1']")).click();
+        driver.findElement(By.name("agree")).click();
+        driver.findElement(By.xpath("//input[@value='Continue']")).click();
+
+        // Success message
+        WebElement successMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//h1[contains(text(),'Your Account Has Been Created!')]")));
+
+        if (successMsg.isDisplayed()) {
+            System.out.println("Registration successful: " + successMsg.getText());
         } else {
-            System.out.println("❌ Cart is missing HTC Touch HD");
+            System.out.println(" Registration failed!");
         }
 
-        // -------- STEP 10: Checkout --------
-        driver.findElement(By.linkText("Checkout")).click();
-        if (driver.getTitle().contains("Checkout")) {
-            System.out.println("✅ Checkout page opened");
-        } else {
-            System.out.println("❌ Checkout page not opened");
-        }
+        // Click Continue button on success page
+        driver.findElement(By.xpath("//a[contains(text(),'Continue')]")).click();
+        
+        driver.findElement(By.xpath("//*[@id=\"menu\"]/div[2]/ul/li[3]/a")).click();
+     driver.findElement(By.xpath("//*[@id=\"menu\"]/div[2]/ul/li[3]/div/div/ul/li[2]/a")).click();
+     // Locate the dropdown element
+       
 
-        // -------- STEP 11: Logout --------
-        driver.findElement(By.xpath("//span[text()='My Account']")).click();
-        driver.findElement(By.linkText("Logout")).click();
+       
 
-        WebElement logoutHeading = driver.findElement(By.xpath("//h1[text()='Account Logout']"));
-        if (logoutHeading.isDisplayed()) {
-            System.out.println("✅ Logout Successful");
-        } else {
-            System.out.println("❌ Logout Failed");
-        }
+       
 
-        // Close browser
-        Thread.sleep(2000);
-        driver.quit();
+     
+        
     }
 }
