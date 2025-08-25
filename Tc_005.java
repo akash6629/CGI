@@ -37,7 +37,7 @@ public class Tc_005 {
 
         // Print all options
         for (WebElement option : l1) {
-            System.out.println(option.getText());
+            System.out.println("values are:" + option.getText());
         }
 
         driver.quit();
