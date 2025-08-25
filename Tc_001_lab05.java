@@ -10,7 +10,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 import java.time.Duration;
 
-public class Tc_001 {
+public class Tc_001_lab05 {
 
     public static void main(String[] args) throws InterruptedException {
 
