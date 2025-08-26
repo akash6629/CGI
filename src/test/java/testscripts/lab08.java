@@ -76,7 +76,7 @@ public class lab08 {
         By searchBox = By.name("search");
         driver.findElement(searchBox).clear();
         driver.findElement(searchBox).sendKeys("Monitors");
-        driver.findElement(By.name("sub_category")).click();  // Click "Search in product descriptions"
+        driver.findElement(By.name("sub_category")).click();  
         driver.findElement(By.id("button-search")).click();
         Reporter.log("Searched with 'Monitors' including descriptions", true);
 
