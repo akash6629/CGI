@@ -1,31 +1,141 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="4" total="6" passed="2" failed="0" skipped="0">
+<testng-results ignored="0" total="6" passed="6" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-08-26T15:31:42 IST" name="Group Suite" finished-at="2025-08-26T15:31:42 IST" duration-ms="237">
+  <suite started-at="2025-08-26T16:24:11 IST" name="Suite_lab" finished-at="2025-08-26T16:24:32 IST" duration-ms="21152">
     <groups>
-      <group name="regression">
-        <method signature="Tc_010_Groups.paymentTest()[pri:0, instance:testscripts.Tc_010_Groups@217ed35e]" name="paymentTest" class="testscripts.Tc_010_Groups"/>
-      </group> <!-- regression -->
-      <group name="smoke">
-        <method signature="Tc_010_Groups.loginTest()[pri:0, instance:testscripts.Tc_010_Groups@689604d9]" name="loginTest" class="testscripts.Tc_010_Groups"/>
-      </group> <!-- smoke -->
     </groups>
-    <test started-at="2025-08-26T15:31:42 IST" name="Smoke Tests" finished-at="2025-08-26T15:31:42 IST" duration-ms="104">
-      <class name="testscripts.Tc_010_Groups">
-        <test-method signature="loginTest()[pri:0, instance:testscripts.Tc_010_Groups@689604d9]" started-at="2025-08-26T15:31:42 IST" name="loginTest" finished-at="2025-08-26T15:31:42 IST" duration-ms="27" status="PASS">
+    <test started-at="2025-08-26T16:24:11 IST" name="EdgeTest" finished-at="2025-08-26T16:24:24 IST" duration-ms="12848">
+      <class name="testscripts.lab3">
+        <test-method is-config="true" signature="setUp(java.lang.String)[pri:0, instance:testscripts.lab3@bcec361]" started-at="2025-08-26T16:24:11 IST" name="setUp" finished-at="2025-08-26T16:24:16 IST" duration-ms="4789" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[edge]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- loginTest -->
-      </class> <!-- testscripts.Tc_010_Groups -->
-    </test> <!-- Smoke Tests -->
-    <test started-at="2025-08-26T15:31:42 IST" name="Regression Tests" finished-at="2025-08-26T15:31:42 IST" duration-ms="6">
-      <class name="testscripts.Tc_010_Groups">
-        <test-method signature="paymentTest()[pri:0, instance:testscripts.Tc_010_Groups@217ed35e]" started-at="2025-08-26T15:31:42 IST" name="paymentTest" finished-at="2025-08-26T15:31:42 IST" duration-ms="1" status="PASS">
+        </test-method> <!-- setUp -->
+        <test-method signature="lab_3()[pri:0, instance:testscripts.lab3@bcec361]" started-at="2025-08-26T16:24:16 IST" name="lab_3" finished-at="2025-08-26T16:24:18 IST" duration-ms="2305" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- paymentTest -->
-      </class> <!-- testscripts.Tc_010_Groups -->
-    </test> <!-- Regression Tests -->
-  </suite> <!-- Group Suite -->
+        </test-method> <!-- lab_3 -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:testscripts.lab3@bcec361]" started-at="2025-08-26T16:24:18 IST" name="CloseBrowser" finished-at="2025-08-26T16:24:19 IST" duration-ms="372" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CloseBrowser -->
+      </class> <!-- testscripts.lab3 -->
+      <class name="testscripts.lab4">
+        <test-method is-config="true" signature="setUp(java.lang.String)[pri:0, instance:testscripts.lab4@26794848]" started-at="2025-08-26T16:24:19 IST" name="setUp" finished-at="2025-08-26T16:24:22 IST" duration-ms="3045" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[edge]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="lab_4()[pri:0, instance:testscripts.lab4@26794848]" started-at="2025-08-26T16:24:22 IST" name="lab_4" finished-at="2025-08-26T16:24:24 IST" duration-ms="1876" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- lab_4 -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:testscripts.lab4@26794848]" started-at="2025-08-26T16:24:24 IST" name="CloseBrowser" finished-at="2025-08-26T16:24:24 IST" duration-ms="365" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CloseBrowser -->
+      </class> <!-- testscripts.lab4 -->
+    </test> <!-- EdgeTest -->
+    <test started-at="2025-08-26T16:24:11 IST" name="ChromeTest" finished-at="2025-08-26T16:24:24 IST" duration-ms="13332">
+      <class name="testscripts.lab3">
+        <test-method is-config="true" signature="setUp(java.lang.String)[pri:0, instance:testscripts.lab3@79079097]" started-at="2025-08-26T16:24:11 IST" name="setUp" finished-at="2025-08-26T16:24:17 IST" duration-ms="5843" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="lab_3()[pri:0, instance:testscripts.lab3@79079097]" started-at="2025-08-26T16:24:17 IST" name="lab_3" finished-at="2025-08-26T16:24:19 IST" duration-ms="1835" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- lab_3 -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:testscripts.lab3@79079097]" started-at="2025-08-26T16:24:19 IST" name="CloseBrowser" finished-at="2025-08-26T16:24:19 IST" duration-ms="282" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CloseBrowser -->
+      </class> <!-- testscripts.lab3 -->
+      <class name="testscripts.lab4">
+        <test-method is-config="true" signature="setUp(java.lang.String)[pri:0, instance:testscripts.lab4@4d1c00d0]" started-at="2025-08-26T16:24:19 IST" name="setUp" finished-at="2025-08-26T16:24:23 IST" duration-ms="3360" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="lab_4()[pri:0, instance:testscripts.lab4@4d1c00d0]" started-at="2025-08-26T16:24:23 IST" name="lab_4" finished-at="2025-08-26T16:24:24 IST" duration-ms="1651" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- lab_4 -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:testscripts.lab4@4d1c00d0]" started-at="2025-08-26T16:24:24 IST" name="CloseBrowser" finished-at="2025-08-26T16:24:24 IST" duration-ms="279" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CloseBrowser -->
+      </class> <!-- testscripts.lab4 -->
+    </test> <!-- ChromeTest -->
+    <test started-at="2025-08-26T16:24:11 IST" name="FirefoxTest" finished-at="2025-08-26T16:24:32 IST" duration-ms="21152">
+      <class name="testscripts.lab3">
+        <test-method is-config="true" signature="setUp(java.lang.String)[pri:0, instance:testscripts.lab3@368f2016]" started-at="2025-08-26T16:24:11 IST" name="setUp" finished-at="2025-08-26T16:24:21 IST" duration-ms="10236" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[firefox]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="lab_3()[pri:0, instance:testscripts.lab3@368f2016]" started-at="2025-08-26T16:24:21 IST" name="lab_3" finished-at="2025-08-26T16:24:23 IST" duration-ms="1928" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- lab_3 -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:testscripts.lab3@368f2016]" started-at="2025-08-26T16:24:23 IST" name="CloseBrowser" finished-at="2025-08-26T16:24:25 IST" duration-ms="1731" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CloseBrowser -->
+      </class> <!-- testscripts.lab3 -->
+      <class name="testscripts.lab4">
+        <test-method is-config="true" signature="setUp(java.lang.String)[pri:0, instance:testscripts.lab4@54d9d12d]" started-at="2025-08-26T16:24:25 IST" name="setUp" finished-at="2025-08-26T16:24:30 IST" duration-ms="4680" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[firefox]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="lab_4()[pri:0, instance:testscripts.lab4@54d9d12d]" started-at="2025-08-26T16:24:30 IST" name="lab_4" finished-at="2025-08-26T16:24:31 IST" duration-ms="1272" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- lab_4 -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:testscripts.lab4@54d9d12d]" started-at="2025-08-26T16:24:31 IST" name="CloseBrowser" finished-at="2025-08-26T16:24:32 IST" duration-ms="1223" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CloseBrowser -->
+      </class> <!-- testscripts.lab4 -->
+    </test> <!-- FirefoxTest -->
+  </suite> <!-- Suite_lab -->
 </testng-results>
